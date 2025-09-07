@@ -70,6 +70,23 @@ public class MovieManagerTest {
     }
 
     @Test
+    public void shouldFindLastFiveMoviesIfAddMoviesMoreLimitDefault() {
+        MovieManager manager = new MovieManager();
+
+        manager.addMovie("Бладшот");
+        manager.addMovie("Вперёд");
+        manager.addMovie("Отель Белград");
+        manager.addMovie("Джентльмены");
+        manager.addMovie("Человек-невидимка");
+        manager.addMovie("Тролли. Мировой тур");
+
+        String[] expected = { "Тролли. Мировой тур", "Человек-невидимка", "Джентльмены", "Отель Белград", "Вперёд" };
+        String[] actual = manager.findLast();
+
+        Assertions.assertArrayEquals(expected, actual);
+    }
+
+    @Test
     public void shouldFindLastFiveMoviesIfLimitSeven() {
         MovieManager manager = new MovieManager(7);
 
@@ -98,6 +115,25 @@ public class MovieManagerTest {
         manager.addMovie("Номер один");
 
         String[] expected = { "Номер один", "Тролли. Мировой тур", "Человек-невидимка", "Джентльмены", "Отель Белград", "Вперёд", "Бладшот" };
+        String[] actual = manager.findLast();
+
+        Assertions.assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldFindLastSevenMoviesIfAddMoviesMoreLimitSeven() {
+        MovieManager manager = new MovieManager(7);
+
+        manager.addMovie("Бладшот");
+        manager.addMovie("Вперёд");
+        manager.addMovie("Отель Белград");
+        manager.addMovie("Джентльмены");
+        manager.addMovie("Человек-невидимка");
+        manager.addMovie("Тролли. Мировой тур");
+        manager.addMovie("Номер один");
+        manager.addMovie("Фильм 8");
+
+        String[] expected = { "Фильм 8", "Номер один", "Тролли. Мировой тур", "Человек-невидимка", "Джентльмены", "Отель Белград", "Вперёд" };
         String[] actual = manager.findLast();
 
         Assertions.assertArrayEquals(expected, actual);
